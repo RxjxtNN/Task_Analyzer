@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentTasks = []; // Store tasks for client-side sorting
 
-    const API_URL = 'http://127.0.0.1:8000/api/tasks/analyze/';
+    const API_URL = '/api/tasks/analyze/';
 
     singleTaskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
