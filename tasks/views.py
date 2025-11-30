@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.dateparse import parse_date
 from .models import Task
@@ -45,6 +46,9 @@ def analyze(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': 'POST required'}, status=405)
+
+def index(request):
+    return render(request, 'index.html')
 
 def suggest(request):
     all_tasks = list(Task.objects.all())
