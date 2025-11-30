@@ -1,0 +1,148 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-panel,
+.right-panel {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.left-panel {
+    width: 40%;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+}
+
+.right-panel {
+    width: 60%;
+    background-color: #f9f9f9;
+}
+
+h1,
+h2 {
+    color: #2c3e50;
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 150px;
+    font-family: monospace;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.task-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #ccc;
+}
+
+.task-card.high-priority {
+    border-left-color: #e74c3c;
+    /* Red */
+}
+
+.task-card.medium-priority {
+    border-left-color: #f1c40f;
+    /* Yellow */
+}
+
+.task-card.low-priority {
+    border-left-color: #2ecc71;
+    /* Green */
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.task-score {
+    font-weight: bold;
+    color: #555;
+    background: #eee;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.task-details {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.task-reasons {
+    font-size: 0.85em;
+    color: #e67e22;
+    font-style: italic;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+.panel-header h1 {
+    margin: 0;
+}
+
+.sort-controls select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}

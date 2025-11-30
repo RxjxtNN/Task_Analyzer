@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Add Tasks</h1>
+
+            <div class="form-section">
+                <h2>Single Task</h2>
+                <form id="single-task-form">
+                    <input type="text" id="title" placeholder="Task Title" required>
+                    <input type="date" id="due_date" required>
+                    <input type="number" id="importance" placeholder="Importance (1-10)" min="1" max="10" required>
+                    <input type="number" id="estimated_hours" placeholder="Est. Hours" min="1" required>
+                    <input type="text" id="dependencies" placeholder="Dependencies (IDs, comma separated)">
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+
+            <div class="form-section">
+                <h2>Bulk JSON</h2>
+                <textarea id="bulk-json"
+                    placeholder='[{"title": "Task A", "due_date": "2023-12-31", "importance": 10, "estimated_hours": 2, "dependencies": []}]'></textarea>
+                <button id="analyze-btn">Analyze Bulk</button>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="panel-header">
+                <h1>Analysis Results</h1>
+                <div class="sort-controls">
+                    <label for="sort-strategy">Sort Strategy:</label>
+                    <select id="sort-strategy">
+                        <option value="smart">Smart Balance (Default)</option>
+                        <option value="fastest">Fastest Wins (Low Effort)</option>
+                        <option value="impact">High Impact (Importance)</option>
+                        <option value="deadline">Deadline Driven</option>
+                    </select>
+                </div>
+            </div>
+            <div id="results-list">
+                <!-- Results will appear here -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
