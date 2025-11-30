@@ -7,20 +7,19 @@ class TaskScorer:
         self.tasks = tasks
 
     def calculate_scores(self):
-        # Pass 1: Base Score
-        # Map ID to task and score data
+        # First pass: Calculate base scores from ROI and Urgency
         scores = {}
         
         for task in self.tasks:
-            # ROI: Importance / Estimated Hours
+            # ROI = Importance / Effort
             if task.estimated_hours <= 0:
-                roi = task.importance * 10 # Avoid div by zero, treat as very efficient
+                roi = task.importance * 10 # Prevent div by zero, assume it's a quick win
             else:
                 roi = task.importance / task.estimated_hours
             
-            # Urgency: 1 + (4 / ln(days_until_due + 2))
+            # Urgency curve: 1 + (4 / ln(days + 2))
             if isinstance(task.due_date, str):
-                # Should be date object from model, but handle string just in case
+                # Handle string dates if they slip through
                 from django.utils.dateparse import parse_date
                 d = parse_date(task.due_date)
             else:
@@ -29,7 +28,7 @@ class TaskScorer:
             if d:
                 days_until_due = (d - date.today()).days
             else:
-                days_until_due = 10 # Default if missing
+                days_until_due = 10 # Default to 10 days if missing
                 
             if days_until_due < 0:
                 urgency_multiplier = 5.0
@@ -52,9 +51,8 @@ class TaskScorer:
             if roi > 2:
                 scores[task.id]['reasons'].append("High ROI")
 
-        # Pass 2: Dependency Inheritance
-        # If Task A blocks Task B, Task A inherits 50% of B's score.
-        # task.dependencies contains IDs of tasks that depend on this task (Blocked tasks)
+        # Second pass: Bubble up scores from blocked tasks
+        # If A blocks B, A gets a boost based on B's score
         
         final_results = []
         for task in self.tasks:

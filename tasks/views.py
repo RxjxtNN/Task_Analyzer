@@ -16,7 +16,7 @@ def analyze(request):
                 return JsonResponse({'error': 'Empty body'}, status=400)
                 
             data = json.loads(body)
-            # data can be a list or a single object
+            # Handle both list and single object inputs
             if isinstance(data, dict):
                 data = [data]
             
@@ -37,7 +37,7 @@ def analyze(request):
                     dependencies=deps
                 )
             
-            # Analyze all tasks
+            # Run the scoring algo on everything
             all_tasks = list(Task.objects.all())
             scorer = TaskScorer(all_tasks)
             results = scorer.calculate_scores()

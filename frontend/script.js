@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsList = document.getElementById('results-list');
     const sortSelect = document.getElementById('sort-strategy');
 
-    let currentTasks = []; // Store tasks for client-side sorting
+    let currentTasks = []; // Keep a local copy for sorting
 
     const API_URL = '/api/tasks/analyze/';
 
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const results = await response.json();
-            currentTasks = results; // Save for sorting
-            applySorting(); // Initial render
+            currentTasks = results;
+            applySorting();
         } catch (error) {
             console.error('Error:', error);
             alert('Error analyzing tasks');
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'smart':
             default:
-                // Sort by score (desc) - Default from backend
+                // Default: Use the server-side algorithm score
                 sorted.sort((a, b) => b.score - a.score);
                 break;
         }
@@ -110,13 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'task-card';
 
-            // Determine priority class based on score or reasons
-            // Simple heuristic: Top 33% Red, Middle Yellow, Bottom Green?
-            // Or use score thresholds. Let's use score.
-            // Assuming max score is around 20-50.
-            // Let's use relative ranking since we don't know the max.
-            // Actually, let's just use the reasons.
-            // If "High Urgency" or "Blocking Critical Task" -> High
+            // Highlight high-priority stuff (red/yellow/green)
+            // If it's urgent or blocking something, mark it high.
 
             let priorityClass = 'low-priority';
             const isUrgent = task.reasons.some(r => r.includes('Urgency'));

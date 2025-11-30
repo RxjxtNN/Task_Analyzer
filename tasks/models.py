@@ -5,7 +5,7 @@ class Task(models.Model):
     due_date = models.DateField()
     importance = models.IntegerField()  # 1-10
     estimated_hours = models.IntegerField()
-    dependencies = models.JSONField(default=list, blank=True)  # List of task IDs
+    dependencies = models.JSONField(default=list, blank=True)  # simple list of IDs
 
     def __str__(self):
         return self.title
